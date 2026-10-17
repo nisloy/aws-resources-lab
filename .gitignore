@@ -1,0 +1,11 @@
+# Never commit secrets or private keys
+*.pem
+*.ppk
+.env
+credentials
+*.key
+
+# Local/temporary files
+*.log
+*.tmp
+.DS_Store
