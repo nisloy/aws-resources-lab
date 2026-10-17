@@ -40,7 +40,7 @@ security_group_id=$(aws ec2 describe-security-groups --region "$region" \
   --query 'SecurityGroups[0].GroupId' --output text)
 
 if [ "$security_group_id" != "None" ]; then
-  aws ec2 delete-security-group --region "$region" --group-id "$security_group_id"
+  aws ec2 delete-security-group --region "$region" --group-id "$security_group_id" > /dev/null
   echo "Security group deleted: $security_group_id"
 else
   echo "No tagged security group found."
@@ -48,7 +48,7 @@ fi
 
 # ----- 3. Delete the key pair and the local .pem file -----
 if aws ec2 describe-key-pairs --region "$region" --key-names "$key_name" > /dev/null 2>&1; then
-  aws ec2 delete-key-pair --region "$region" --key-name "$key_name"
+  aws ec2 delete-key-pair --region "$region" --key-name "$key_name" > /dev/null
   rm -f "$key_name.pem"
   echo "Key pair deleted: $key_name"
 else
